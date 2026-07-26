@@ -9,7 +9,7 @@ spec:
   timeout: 3m
   wait: true
   prune: true
-  path: ./deployments/portfolio # 👈 PONTOSAN erre a mappára mutasson!
+  path: ./deployments/portfolio
   sourceRef:
     kind: GitRepository
-    name: talos-repo # 👈 A fenti GitRepository nevére mutat
+    name: podinfo
