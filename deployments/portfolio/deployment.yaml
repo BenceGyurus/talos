@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: portfolio-server
-          image: ghcr.io/bencegyurus/portfolio:latest
+          image: ghcr.io/bencegyurus/portfolio:2026-07-26 # {"$imagepolicy": "flux-system:portfolio-image"}
           ports:
             - containerPort: 3000
 ---
