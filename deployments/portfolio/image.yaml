@@ -1,7 +1,7 @@
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
-  name: podinfo
+  name: portfolio-image
   namespace: flux-system
 spec:
   image: ghcr.io/bencegyurus/portfolio
