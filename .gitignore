@@ -1,0 +1,6 @@
+*.crt
+*.key
+*.env
+.env
+*.bak
+talosconfig

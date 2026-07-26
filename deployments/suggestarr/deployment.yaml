@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suggestarr
+  namespace: default
+  labels:
+    app: suggestarr
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: suggestarr
+  template:
+    metadata:
+      labels:
+        app: suggestarr
+    spec:
+      containers:
+        - name: suggestarr
+          image: ciuse99/suggestarr:latest
+          ports:
+            - containerPort: 5000
+      volumes:
+        - name: suggestarr-config
+          hostPath:
+            path: /app/config/config_files
+            type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: suggestarr-service
+  namespace: default
+spec:
+  selector:
+    app: suggestarr
+  ports:
+    - name: suggestarr-port
+      port: 80
+      targetPort: 5000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: suggestarr-config
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi

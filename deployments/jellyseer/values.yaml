@@ -1,0 +1,33 @@
+controllers:
+  main:
+    pod:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    containers:
+      main:
+        image:
+          repository: ghcr.io/seerr-team/seerr
+          tag: latest
+          pullPolicy: IfNotPresent
+        env:
+          TZ: "Europe/Budapest"
+        
+service:
+  main:
+    controller: main
+    ports:
+      http:
+        port: 5055
+
+persistence:
+  config:
+    enabled: true
+    type: persistentVolumeClaim
+    storageClass: longhorn 
+    accessMode: ReadWriteOnce
+    size: 5Gi 
+    globalMounts:
+      - path: /app/config

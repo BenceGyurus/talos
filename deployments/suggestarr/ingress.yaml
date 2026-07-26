@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: suggestarr-ingress
+  namespace: default
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`suggest.gyurus.hu`)
+      kind: Rule
+      services:
+        - name: suggestarr-service
+          port: 80

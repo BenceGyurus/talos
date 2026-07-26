@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wizarr-longhorn-volume
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizarr
+  namespace: default
+  labels:
+    app: wizarr
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wizarr
+  template:
+    metadata:
+      labels:
+        app: wizarr
+    spec:
+      containers:
+        - name: wizarr
+          image: ghcr.io/wizarrrr/wizarr
+          volumeMounts:
+            - mountPath: "/data"
+              name: data
+          ports:
+            - containerPort: 5690
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: wizarr-longhorn-volume
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wizarr-service
+  namespace: default
+spec:
+  selector:
+    app: wizarr
+  ports:
+    - name: wizarr-port
+      port: 80
+      targetPort: 5690
