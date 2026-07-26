@@ -83,3 +83,20 @@ get talos dashboard:
 ```bash
 talosctl --nodes $CONTROL_PLANE_IP --talosconfig=./talosconfig dashboard
 ```
+
+## Flux commands
+
+update the git repository in order ot pull the modifyed yaml:
+```bash
+flux reconcile source git flux-system
+```
+
+syncronize the kustiomizations:
+```bash
+flux reconcile ks portfolio
+```
+
+get the kustiomizations:
+```bash
+flux get kustomizations
+```
