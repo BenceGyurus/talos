@@ -1,4 +1,4 @@
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.io/v3.7.6
 kind: IngressRoute
 metadata:
   name: authentik-ingress
