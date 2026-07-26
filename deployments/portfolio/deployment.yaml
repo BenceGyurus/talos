@@ -7,7 +7,7 @@ metadata:
   labels:
     app: portfolio
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: portfolio
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: portfolio-server
-          image: ghcr.io/bencegyurus/portfolio:latest
+          image: ghcr.io/bencegyurus/portfolio:v1.0.0
           ports:
             - containerPort: 3000
 ---
