@@ -77,3 +77,9 @@ health check:
 ```bash
 talosctl --nodes $CONTROL_PLANE_IP --talosconfig=./talosconfig health
 ```
+
+get talos dashboard:
+
+```bash
+talosctl --nodes $CONTROL_PLANE_IP --talosconfig=./talosconfig dashboard
+```

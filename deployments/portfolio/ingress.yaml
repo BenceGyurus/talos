@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: portfolio-ingress
+  namespace: portfolio
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`bence.gyurus.hu`)
+      kind: Rule
+      services:
+        - name: portfolio-service
+          port: 80
