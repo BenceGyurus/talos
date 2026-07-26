@@ -7,4 +7,4 @@ spec:
   interval: 5m
   ref:
     branch: master
-  url: https://github.com/BenceGyurus/portfolio
+  url: https://github.com/stefanprodan/podinfo
