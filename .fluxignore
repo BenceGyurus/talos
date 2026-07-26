@@ -1,0 +1,3 @@
+# Ignores Talos config files from Flux reconciliation
+config/
+*.yaml.bak
