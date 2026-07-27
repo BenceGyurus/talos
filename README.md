@@ -105,3 +105,8 @@ remove kustomization
 ```bash
 flux delete kustomization <name> --namespace flux-system
 ```
+
+run flux operator
+```bash
+kubectl -n flux-system port-forward svc/flux-operator 9080:9080
+```
