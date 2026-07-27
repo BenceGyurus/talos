@@ -100,3 +100,8 @@ get the kustiomizations:
 ```bash
 flux get kustomizations
 ```
+
+remove kustomization
+```bash
+flux delete kustomization <name> --namespace flux-system
+```
