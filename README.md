@@ -86,6 +86,18 @@ talosctl --nodes $CONTROL_PLANE_IP --talosconfig=./talosconfig dashboard
 
 ## Flux commands
 
+bootstrap flux:
+```bash
+flux bootstrap github \
+  --components-extra=image-reflector-controller,image-automation-controller \
+  --owner=$GITHUB_USER \
+  --repository=flux-image-updates \
+  --branch=main \
+  --path=clusters/my-cluster \
+  --read-write-key \
+  --personal
+```
+
 update the git repository in order ot pull the modifyed yaml:
 ```bash
 flux reconcile source git flux-system
