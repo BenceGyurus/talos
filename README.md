@@ -129,3 +129,8 @@ finalize stucked taks in kubernetes:
 ```bash
 kubectl patch kustomization <pod-name> -n <namespace> --type merge -p '{"metadata":{"finalizers":null}}'
 ```
+
+image update
+```bash 
+flux reconcile image update portfolio-image-update -n flux-system
+```

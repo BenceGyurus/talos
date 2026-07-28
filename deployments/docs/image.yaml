@@ -1,0 +1,8 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: docs-image
+  namespace: flux-system
+spec:
+  image: ghcr.io/bencegyurus/gyurus-docs
+  interval: 5m
