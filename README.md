@@ -110,3 +110,10 @@ run flux operator
 ```bash
 kubectl -n flux-system port-forward svc/flux-operator 9080:9080
 ```
+
+then it is accessable on http://localhost:9080
+
+finalize stucked taks in kubernetes:
+```bash
+kubectl patch kustomization <pod-name> -n <namespace> --type merge -p '{"metadata":{"finalizers":null}}'
+```
