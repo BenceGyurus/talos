@@ -33,4 +33,4 @@ spec:
   ports:
     - name: docs-port
       port: 80
-      targetPort: 3000
+      targetPort: 80
