@@ -6,6 +6,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: docs-image
+  filterTags:
+    pattern: '^(?P<version>[0-9]+\.[0-9]+\.[0-9]+)$'
+    extract: '$version'
   policy:
     semver:
-      range: 1.x.x
+      range: '>=0.1.0'
