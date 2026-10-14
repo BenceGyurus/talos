@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: repsit-server
-          image: ghcr.io/bencegyurus/repsit:1.0.3 # {"$imagepolicy": "flux-system:repsit-image"}
+          image: ghcr.io/bencegyurus/repsit:1.0.4 # {"$imagepolicy": "flux-system:repsit-image"}
           ports:
             - containerPort: 8080
 ---
