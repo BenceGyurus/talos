@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: repsit-ingress
+  namespace: repsit
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`repsit.gyurus.hu`)
+      kind: Rule
+      services:
+        - name: repsit-service
+          port: 80

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: repsit
+  namespace: repsit
+  labels:
+    app: repsit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: repsit
+  template:
+    metadata:
+      labels:
+        app: repsit
+    spec:
+      containers:
+        - name: repsit-server
+          image: docker pull ghcr.io/bencegyurus/repsit:v1.0.0 # {"$imagepolicy": "flux-system:repsit-image"}
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: repsit-service
+  namespace: repsit
+spec:
+  selector:
+    app: repsit
+  ports:
+    - name: repsit-port
+      port: 80
+      targetPort: 8080
