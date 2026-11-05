@@ -1,0 +1,20 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: my-dep
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      app: my-web # the rs will handle the pods with this label
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: my-web # this label will be used by both rs and svc
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx
+        ports:
+        - containerPort: 80

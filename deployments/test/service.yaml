@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc
+  namespace: test
+spec:
+  selector:
+    app: my-web # it will handle only those pods which are labeled with this "app: my-web" label, too
+  ports:
+  - protocol: TCP 
+    port: 80 # the port at the pod
+    nodePort: 30900 # port at the node from the 30000-32767 range; requests addressed to any "cluster-nodeIP:nodeport" will be fwd-ed into the pod
+  type: NodePort # or LoadBalancer (useful in public cloud, etc.); or ClusterIP (but then the service cannot be seen outside the cluster) 
