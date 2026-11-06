@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deployment
+  name: web-backend
   labels:
     app: web
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: web
@@ -13,21 +13,21 @@ spec:
     metadata:
       labels:
         app: web
-        role: frontend
+        component: frontend
         version: v1
     spec:
       containers:
-      - name: web-responder
+      - name: responder
         image: hashicorp/http-echo:0.2.3
         args:
-          - "-text=42"
-          - "-listen=:5678"
+          - "-text=78"
+          - "-listen=:8080"
         ports:
-        - containerPort: 5678
+        - containerPort: 8080
         resources:
           requests:
-            memory: "32Mi"
-            cpu: "50m"
+            memory: "64Mi"
+            cpu: "100m"
           limits:
             memory: "64Mi"
             cpu: "100m"
@@ -35,9 +35,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db-deployment
+  name: postgres-db
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: db
@@ -45,30 +45,33 @@ spec:
     metadata:
       labels:
         app: db
-        role: database
+        component: database
     spec:
       containers:
-      - name: db-container
+      - name: db-engine
         image: nginx:alpine
+      - name: log-sidecar
+        image: busybox
+        command: ["sh", "-c", "sleep 3600"]
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cache-deployment
+  name: redis-worker
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: cache
+      app: worker
   template:
     metadata:
       labels:
-        app: cache
-        role: cache
+        app: worker
+        component: cache
         version: v2
     spec:
       containers:
-      - name: cache-container
+      - name: worker-node
         image: redis:alpine
 ---
 apiVersion: v1
@@ -80,6 +83,6 @@ spec:
     app: web
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 5678
+      port: 80
+      targetPort: 8080
   type: ClusterIP
